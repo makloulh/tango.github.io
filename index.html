@@ -1,0 +1,2488 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tango Game - New Features</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" xintegrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    :root {
+      --font-family-main: 'Poppins', Arial, sans-serif;
+      
+      /* Light Theme */
+      --bg-light: #f0f4f8; 
+      --text-light: #2d3748; 
+      --card-bg-light: #ffffff;
+      --card-shadow-light: rgba(0, 0, 0, 0.08);
+      --board-bg-light: #e2e8f0; 
+      --cell-bg-light: #ffffff;
+      --cell-border-light: #cbd5e0;
+      --cell-fixed-bg-light: #e2e8f0;
+      --cell-fixed-text-light: #4a5568;
+      --cell-error-bg-light: #fff5f5;
+      --cell-error-border-light: #e53e3e; 
+      --cell-highlight-outline-light: #8e44ad; 
+      --button-bg-light: #3498db; 
+      --button-text-light: #ffffff;
+      --button-hover-bg-light: #2980b9;
+      --google-btn-bg-light: #db4437;
+      --google-btn-hover-bg-light: #c23321;
+      --total-bg-light: #e2e8f0;
+      --total-text-light: #4a5568;
+      --total-complete-bg-light: #c6f6d5; 
+      --total-complete-text-light: #2f855a;
+      --total-complete-border-light: #38a169;
+      --total-error-sum-bg-light: #fee2e2; 
+      --total-error-sum-text-light: #b91c1c; 
+      --total-error-sum-border-light: #ef4444; 
+      --stats-bg-light: #ffffff;
+      --link-light: var(--button-bg-light);
+      --input-bg-light: transparent; /* Material style */
+      --input-border-light: #d1d5db; 
+      --input-focus-border-light: var(--button-bg-light);
+      --input-placeholder-light: #9ca3af;
+      --user-email-display-color-light: #718096;
+      --bottom-nav-bg-light: #ffffff;
+      --bottom-nav-icon-light: #718096;
+      --bottom-nav-icon-active-light: var(--button-bg-light);
+      --bottom-nav-border-light: #e2e8f0;
+      --icon-zero-color-light: #3498db; /* Blue for zero */
+      --icon-one-color-light: #e74c3c;  /* Red for one */
+
+
+      /* Custom Button Colors - Light Theme */
+      --btn-hint-bg-light: #f39c12; 
+      --btn-hint-hover-bg-light: #e67e22;
+      --btn-delete-bg-light: #c0392b; 
+      --btn-delete-hover-bg-light: #a93226;
+      --btn-undo-bg-light: #5dade2; 
+      --btn-undo-hover-bg-light: #4a90e2;
+      --btn-redo-bg-light: #e67e22; 
+      --btn-redo-hover-bg-light: #d35400;
+      --btn-highlight-bg-light: #8e44ad; 
+      --btn-highlight-hover-bg-light: #7d3c98;
+      --btn-check-bg-light: #1abc9c; 
+      --btn-check-hover-bg-light: #16a085;
+      --btn-endgame-enabled-bg-light: #2ecc71; 
+      --btn-endgame-enabled-hover-bg-light: #27ae60;
+      --btn-clear-leaderboard-bg-light: #e74c3c; 
+      --btn-clear-leaderboard-hover-bg-light: #c0392b;
+      --btn-edit-profile-bg-light: #9b59b6; 
+      --btn-edit-profile-hover-bg-light: #8e44ad;
+
+
+      /* Dark Theme */
+      --bg-dark: #171923; 
+      --text-dark: #e2e8f0;
+      --card-bg-dark: #2d3748; 
+      --card-shadow-dark: rgba(0, 0, 0, 0.25);
+      --board-bg-dark: #252e3d; 
+      --cell-bg-dark: #2d3748;
+      --cell-border-dark: #4a5568;
+      --cell-fixed-bg-dark: #354152; 
+      --cell-fixed-text-dark: #a0aec0;
+      --cell-error-bg-dark: #432c31;
+      --cell-error-border-dark: #e53e3e; 
+      --cell-highlight-outline-dark: #9b59b6; 
+      --button-bg-dark: #4299e1; 
+      --button-text-dark: #ffffff;
+      --button-hover-bg-dark: #2b6cb0;
+      --google-btn-bg-dark: #e57373; 
+      --google-btn-hover-bg-dark: #ef5350;
+      --total-bg-dark: #354152;
+      --total-text-dark: #cbd5e0;
+      --total-complete-bg-dark: #2f855a;
+      --total-complete-text-dark: #c6f6d5;
+      --total-complete-border-dark: #68d391;
+      --total-error-sum-bg-dark: #452323; 
+      --total-error-sum-text-dark: #f8b4b4; 
+      --total-error-sum-border-dark: #c13b3b; 
+      --stats-bg-dark: #2d3748;
+      --link-dark: var(--button-bg-dark);
+      --input-bg-dark: transparent; /* Material style */
+      --input-border-dark: #4b5563; 
+      --input-focus-border-dark: var(--button-bg-dark);
+      --input-placeholder-dark: #6b7280;
+      --user-email-display-color-dark: #a0aec0;
+      --bottom-nav-bg-dark: #2d3748;
+      --bottom-nav-icon-dark: #a0aec0;
+      --bottom-nav-icon-active-dark: var(--button-bg-dark);
+      --bottom-nav-border-dark: #4a5568;
+      --icon-zero-color-dark: #4299e1; /* Lighter blue for zero */
+      --icon-one-color-dark: #ec7063;  /* Lighter red for one */
+
+
+      /* Custom Button Colors - Dark Theme */
+      --btn-hint-bg-dark: #f5b041;
+      --btn-hint-hover-bg-dark: #f39c12;
+      --btn-delete-bg-dark: #ec7063;
+      --btn-delete-hover-bg-dark: #e74c3c;
+      --btn-undo-bg-dark: #5dade2; 
+      --btn-undo-hover-bg-dark: #4a90e2;
+      --btn-redo-bg-dark: #f39c12; 
+      --btn-redo-hover-bg-dark: #e67e22;
+      --btn-highlight-bg-dark: #9b59b6;
+      --btn-highlight-hover-bg-dark: #8e44ad;
+      --btn-check-bg-dark: #1dd1a1;
+      --btn-check-hover-bg-dark: #1abc9c;
+      --btn-endgame-enabled-bg-dark: #48bb78; 
+      --btn-endgame-enabled-hover-bg-dark: #38a169;
+      --btn-clear-leaderboard-bg-dark: #ec7063;
+      --btn-clear-leaderboard-hover-bg-dark: #e74c3c;
+      --btn-edit-profile-bg-dark: #ab82c5; 
+      --btn-edit-profile-hover-bg-dark: #9b59b6;
+    }
+
+    body {
+      font-family: var(--font-family-main);
+      background: var(--bg-light);
+      color: var(--text-light);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem; 
+      margin: 0;
+      min-height: 100vh;
+      box-sizing: border-box;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      padding-bottom: 80px; /* Space for bottom nav */
+    }
+
+    body.dark {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+    
+    .card-style { 
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 25px;
+      background-color: var(--card-bg-light);
+      border-radius: 16px; 
+      box-shadow: 0 8px 25px var(--card-shadow-light);
+      width: 100%;
+      max-width: 500px; 
+    }
+    body.dark .card-style {
+        background-color: var(--card-bg-dark);
+        box-shadow: 0 8px 25px var(--card-shadow-dark);
+    }
+
+    .menu { 
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 25px 30px; 
+        background-color: var(--card-bg-light);
+        border-radius: 16px;
+        box-shadow: 0 8px 25px var(--card-shadow-light);
+        width: 100%;
+        max-width: 550px; 
+    }
+    body.dark .menu {
+        background-color: var(--card-bg-dark);
+        box-shadow: 0 8px 25px var(--card-shadow-dark);
+    }
+
+    .menu h1 {
+        font-weight: 700;
+        font-size: 2.5rem; 
+        margin-bottom: 25px;
+        color: var(--button-bg-light);
+    }
+    body.dark .menu h1 {
+        color: var(--button-bg-dark);
+    }
+    .difficulty-selector {
+        margin: 20px 0 30px 0; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    .difficulty-selector label {
+        font-weight: 500; 
+        font-size: 1rem;
+    }
+    .difficulty-selector select {
+        padding: 10px 15px;
+        border-radius: 8px;
+        border: 1px solid var(--input-border-light);
+        background-color: var(--input-bg-light);
+        color: var(--text-light);
+        font-family: var(--font-family-main);
+        font-size: 1rem;
+        transition: border-color 0.2s ease;
+    }
+    .difficulty-selector select:focus {
+        outline: none;
+        border-color: var(--input-focus-border-light);
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2); 
+    }
+    body.dark .difficulty-selector select {
+        background-color: var(--input-bg-dark);
+        border-color: var(--input-border-dark);
+        color: var(--text-dark);
+    }
+    body.dark .difficulty-selector select:focus {
+        border-color: var(--input-focus-border-dark);
+        box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3);
+    }
+    .menu-actions-container {
+        display: flex;
+        flex-direction: column; 
+        align-items: center; 
+        gap: 12px; 
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .menu-actions-container button {
+        width: 100%; 
+        max-width: 350px; 
+    }
+    .menu-user-sub-actions { 
+        margin-top: 20px;
+        padding-top: 15px;
+    }
+    body.dark .menu-user-sub-actions {
+    }
+    .menu-user-sub-actions .user-email-display {
+        margin-bottom: 10px;
+    }
+    .menu-user-sub-actions .menu-user-actions { 
+        margin-top: 0; 
+    }
+
+
+    .board {
+      display: inline-block;
+      margin-top: 15px;
+      border: none; 
+      padding: 10px; 
+      background-color: var(--board-bg-light);
+      border-radius: 12px; 
+      box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+    }
+    body.dark .board {
+        background-color: var(--board-bg-dark);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+
+    .row {
+      display: flex;
+      gap: 3px; 
+    }
+    .row:not(:last-child) {
+        margin-bottom: 3px; 
+    }
+
+
+    .cell {
+      width: 40px; 
+      height: 40px;
+      border: 1px solid var(--cell-border-light);
+      border-radius: 6px; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em; /* Adjusted for icons */
+      font-weight: 600;
+      cursor: pointer;
+      background: var(--cell-bg-light);
+      transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease, outline 0.2s ease;
+      box-sizing: border-box;
+    }
+    .cell i.fa-circle { /* Specific for filled circle */
+        color: var(--icon-one-color-light);
+    }
+    .cell i.far.fa-circle { /* Specific for hollow circle */
+         color: var(--icon-zero-color-light);
+    }
+    body.dark .cell i.fa-circle {
+        color: var(--icon-one-color-dark);
+    }
+    body.dark .cell i.far.fa-circle {
+        color: var(--icon-zero-color-dark);
+    }
+
+     .cell:hover:not(.fixed) {
+        transform: translateY(-1px); 
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+     }
+     .cell:active:not(.fixed) {
+        transform: scale(0.95) translateY(0);
+        box-shadow: none;
+    }
+    .cell.value-x { 
+        color: #a0aec0; 
+        font-style: italic;
+        font-size: 18px; /* Reset font size for 'x' if needed */
+    }
+    body.dark .cell.value-x {
+        color: #718096;
+    }
+    .cell.highlight { 
+        outline: 2px solid var(--cell-highlight-outline-light);
+        outline-offset: -2px;
+        box-shadow: 0 0 8px var(--cell-highlight-outline-light);
+    }
+    body.dark .cell.highlight {
+        outline-color: var(--cell-highlight-outline-dark);
+        box-shadow: 0 0 8px var(--cell-highlight-outline-dark);
+    }
+
+
+    body.dark .cell {
+      background: var(--cell-bg-dark);
+      border-color: var(--cell-border-dark);
+      color: var(--text-dark); /* Default text color for 'x' */
+    }
+     body.dark .cell:hover:not(.fixed) {
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+     }
+
+    .cell.fixed {
+      background-color: var(--cell-fixed-bg-light);
+      /* color: var(--cell-fixed-text-light); Icons will have their own color */
+      pointer-events: none;
+      font-weight: 700; 
+    }
+    body.dark .cell.fixed {
+      background-color: var(--cell-fixed-bg-dark);
+      /* color: var(--cell-fixed-text-dark); */
+    }
+
+    .cell.error { 
+      background-color: var(--cell-error-bg-light) !important;
+      border: 2px solid var(--cell-error-border-light) !important;
+      /* color: var(--cell-error-border-light) !important; Icons will have their own color */
+      animation: shake 0.4s;
+    }
+    body.dark .cell.error {
+      background-color: var(--cell-error-bg-dark) !important;
+      border-color: var(--cell-error-border-light) !important; 
+      /* color: #fbcfe8 !important; */
+    }
+    
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.5); 
+      }
+      70% {
+        transform: scale(1.02);
+        box-shadow: 0 0 0 12px rgba(46, 204, 113, 0);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
+      }
+    }
+    @keyframes shake { 
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      50% { transform: translateX(4px); }
+      75% { transform: translateX(-4px); }
+    }
+
+    button {
+      margin: 8px 5px;
+      padding: 12px 20px; 
+      border: none;
+      border-radius: 8px; 
+      background-color: var(--button-bg-light);
+      color: var(--button-text-light);
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      min-width: 50px; 
+      text-align: center;
+    }
+    button i { 
+        font-size: 1.1em; 
+        margin-right: 0px; 
+    }
+    button.icon-only i { 
+        margin-right: 0;
+    }
+    button.google-login-btn i {
+        margin-right: 8px; 
+    }
+    #clear-leaderboard-btn i, #edit-profile-btn i {
+        margin-left: 5px;
+    }
+
+
+    button:hover {
+      background-color: var(--button-hover-bg-light);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    button:active {
+        transform: translateY(0px) scale(0.98);
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    }
+    button:disabled {
+      background-color: #bdc3c7 !important; 
+      cursor: not-allowed !important;
+      opacity: 0.6 !important;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    /* Specific Button Colors */
+    #hint-btn { background-color: var(--btn-hint-bg-light); }
+    #hint-btn:hover:not(:disabled) { background-color: var(--btn-hint-hover-bg-light); }
+    #delete-btn { background-color: var(--btn-delete-bg-light); }
+    #delete-btn:hover:not(:disabled) { background-color: var(--btn-delete-hover-bg-light); }
+    #undo { background-color: var(--btn-undo-bg-light); }
+    #undo:hover:not(:disabled) { background-color: var(--btn-undo-hover-bg-light); }
+    #redo-btn { background-color: var(--btn-redo-bg-light); } 
+    #redo-btn:hover:not(:disabled) { background-color: var(--btn-redo-hover-bg-light); } 
+    #highlight-errors-btn { background-color: var(--btn-highlight-bg-light); }
+    #highlight-errors-btn:hover:not(:disabled) { background-color: var(--btn-highlight-hover-bg-light); }
+    #check-btn { background-color: var(--btn-check-bg-light); }
+    #check-btn:hover:not(:disabled) { background-color: var(--btn-check-hover-bg-light); }
+    #clear-leaderboard-btn { background-color: var(--btn-clear-leaderboard-bg-light); }
+    #clear-leaderboard-btn:hover:not(:disabled) { background-color: var(--btn-clear-leaderboard-hover-bg-light); }
+    #edit-profile-btn { background-color: var(--btn-edit-profile-bg-light); }
+    #edit-profile-btn:hover:not(:disabled) { background-color: var(--btn-edit-profile-hover-bg-light); }
+    
+    button.enabled { /* For end-game button */
+      background-color: var(--btn-endgame-enabled-bg-light) !important; 
+      animation: pulse 1.8s infinite ease-in-out;
+    }
+    button.enabled:hover {
+        background-color: var(--btn-endgame-enabled-hover-bg-light) !important;
+    }
+    #end-game i { margin-right: 5px;} 
+
+
+    body.dark button { 
+        background-color: var(--button-bg-dark);
+        color: var(--button-text-dark);
+    }
+    body.dark button:hover:not(:disabled) {
+        background-color: var(--button-hover-bg-dark);
+    }
+    body.dark button:disabled {
+        background-color: #4a5568 !important;
+        color: #718096 !important;
+    }
+    /* Specific Button Colors - Dark Theme */
+    body.dark #hint-btn { background-color: var(--btn-hint-bg-dark); }
+    body.dark #hint-btn:hover:not(:disabled) { background-color: var(--btn-hint-hover-bg-dark); }
+    body.dark #delete-btn { background-color: var(--btn-delete-bg-dark); }
+    body.dark #delete-btn:hover:not(:disabled) { background-color: var(--btn-delete-hover-bg-dark); }
+    body.dark #undo { background-color: var(--btn-undo-bg-dark); }
+    body.dark #undo:hover:not(:disabled) { background-color: var(--btn-undo-hover-bg-dark); }
+    body.dark #redo-btn { background-color: var(--btn-redo-bg-dark); } 
+    body.dark #redo-btn:hover:not(:disabled) { background-color: var(--btn-redo-hover-bg-dark); } 
+    body.dark #highlight-errors-btn { background-color: var(--btn-highlight-bg-dark); }
+    body.dark #highlight-errors-btn:hover:not(:disabled) { background-color: var(--btn-highlight-hover-bg-dark); }
+    body.dark #check-btn { background-color: var(--btn-check-bg-dark); }
+    body.dark #check-btn:hover:not(:disabled) { background-color: var(--btn-check-hover-bg-dark); }
+    body.dark #clear-leaderboard-btn { background-color: var(--btn-clear-leaderboard-bg-dark); }
+    body.dark #clear-leaderboard-btn:hover:not(:disabled) { background-color: var(--btn-clear-leaderboard-hover-bg-dark); }
+    body.dark #edit-profile-btn { background-color: var(--btn-edit-profile-bg-dark); }
+    body.dark #edit-profile-btn:hover:not(:disabled) { background-color: var(--btn-edit-profile-hover-bg-dark); }
+
+
+    body.dark button.enabled {
+        background-color: var(--btn-endgame-enabled-bg-dark) !important; 
+    }
+    body.dark button.enabled:hover {
+        background-color: var(--btn-endgame-enabled-hover-bg-dark) !important;
+    }
+    .google-login-btn {
+        background-color: var(--google-btn-bg-light) !important;
+    }
+    .google-login-btn:hover {
+        background-color: var(--google-btn-hover-bg-light) !important;
+    }
+    body.dark .google-login-btn {
+        background-color: var(--google-btn-bg-dark) !important;
+    }
+    body.dark .google-login-btn:hover {
+        background-color: var(--google-btn-hover-bg-dark) !important;
+    }
+
+
+    #leaderboard { /* Apply card style */
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 25px;
+        background-color: var(--card-bg-light);
+        border-radius: 16px;
+        box-shadow: 0 8px 25px var(--card-shadow-light);
+        width: 100%;
+        max-width: 500px;
+    }
+    body.dark #leaderboard {
+        background-color: var(--card-bg-dark);
+        box-shadow: 0 8px 25px var(--card-shadow-dark);
+    }
+    #leaderboard h2 {
+        color: var(--button-bg-light);
+        margin-bottom: 15px;
+        font-size: 1.8rem;
+    }
+    body.dark #leaderboard h2 {
+        color: var(--button-bg-dark);
+    }
+    #leaderboard-list {
+      list-style: none; 
+      padding: 0;
+      margin: 1rem 0;
+      text-align: left;
+    }
+    #leaderboard-list li {
+        padding: 10px 15px;
+        border-bottom: 1px solid var(--cell-border-light);
+        transition: background-color 0.2s ease;
+        font-size: 0.9rem; 
+    }
+    #leaderboard-list li .score-breakdown {
+        font-size: 0.8rem;
+        color: #555;
+        display: block;
+        margin-top: 3px;
+    }
+    body.dark #leaderboard-list li .score-breakdown {
+        color: #a0aec0;
+    }
+
+    #leaderboard-list li:last-child {
+        border-bottom: none;
+    }
+    #leaderboard-list li:hover {
+        background-color: var(--board-bg-light);
+    }
+    body.dark #leaderboard-list li {
+        border-bottom: 1px solid var(--cell-border-dark);
+    }
+    body.dark #leaderboard-list li:hover {
+        background-color: var(--board-bg-dark);
+    }
+
+
+    .row-total,
+    .cell-total {
+      width: 40px; 
+      height: 40px;
+      text-align: center;
+      font-size: 12px; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--cell-border-light);
+      background-color: var(--total-bg-light);
+      color: var(--total-text-light);
+      margin-left: 5px; 
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-weight: 600;
+    }
+    .totals-container .cell-total {
+        margin-left: 0; 
+        margin-right: 2px; 
+        margin-top: 5px; 
+    }
+    .total-value {
+      font-weight: 700;
+      display: block;
+      line-height: 1.3;
+    }
+    .row-total.complete,
+    .cell-total.complete {
+      background-color: var(--total-complete-bg-light); 
+      color: var(--total-complete-text-light);
+      border: 1px solid var(--total-complete-border-light);
+    }
+    .row-total.error-sum,
+    .cell-total.error-sum {
+        background-color: var(--total-error-sum-bg-light) !important;
+        color: var(--total-error-sum-text-light) !important;
+        border: 1px solid var(--total-error-sum-border-light) !important;
+    }
+
+    .totals-container {
+      display: flex;
+      justify-content: flex-start; 
+      padding-left: 0; 
+      gap: 2px; 
+    }
+
+    body.dark .row-total,
+    body.dark .cell-total {
+      background-color: var(--total-bg-dark);
+      border-color: var(--cell-border-dark);
+      color: var(--total-text-dark);
+    }
+    body.dark .row-total.complete,
+    body.dark .cell-total.complete {
+        background-color: var(--total-complete-bg-dark);
+        color: var(--total-complete-text-dark);
+        border-color: var(--total-complete-border-dark);
+    }
+    body.dark .row-total.error-sum,
+    body.dark .cell-total.error-sum {
+        background-color: var(--total-error-sum-bg-dark) !important;
+        color: var(--total-error-sum-text-dark) !important;
+        border: 1px solid var(--total-error-sum-border-dark) !important;
+    }
+
+
+    .game-controls {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px; 
+      margin-top: 20px;
+      width: 100%;
+      max-width: 500px; 
+    }
+    .game-controls button { 
+        padding: 10px 12px; 
+        min-width: 45px; 
+    }
+
+    .game-stats {
+      display: flex; 
+      flex-wrap: wrap; 
+      justify-content: center; 
+      align-items: center;
+      gap: 15px; 
+      margin-bottom: 20px;
+      padding: 12px 15px;
+      background-color: var(--stats-bg-light);
+      border-radius: 10px;
+      width: 100%;
+      max-width: 400px; 
+      font-size: 0.95rem; 
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .game-stats > div { 
+        display: flex;
+        align-items: center;
+        gap: 5px; 
+    }
+    .game-stats i {
+        font-size: 1em; 
+        color: var(--button-bg-light);
+    }
+    body.dark .game-stats i {
+        color: var(--button-bg-dark);
+    }
+
+    #difficulty-display {
+        font-size: 0.85rem;
+        color: #555;
+        width: 100%; 
+        text-align: center;
+        margin-top: 5px; 
+    }
+    body.dark #difficulty-display {
+        color: #a0aec0;
+    }
+
+    body.dark .game-stats {
+      background-color: var(--stats-bg-dark);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Auth Container is now part of SweetAlert, so direct styling here is less relevant */
+    /* #auth-container { ... } */
+
+    .password-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        margin: 12px 0;
+    }
+    /* Styles for inputs within SweetAlert */
+    .swal2-html-container input[type="email"],
+    .swal2-html-container .password-wrapper input[type="password"],
+    .swal2-html-container .password-wrapper input[type="text"] {
+        font-family: var(--font-family-main) !important;
+        border: none !important; /* Remove default Swal border */
+        border-bottom: 1px solid var(--input-border-light) !important; /* Material bottom border */
+        background-color: var(--input-bg-light) !important;
+        color: var(--text-light) !important;
+        border-radius: 0 !important; /* No border radius for material style */
+        padding: 10px 5px !important; /* Adjust padding */
+        width: 100% !important;
+        box-sizing: border-box !important;
+        box-shadow: none !important; /* Remove Swal box-shadow */
+        margin-bottom: 15px !important; /* Space below input */
+    }
+     .swal2-html-container .password-wrapper input[type="password"],
+     .swal2-html-container .password-wrapper input[type="text"] {
+        padding-right: 40px !important; 
+    }
+     .swal2-html-container input[type="email"]:focus,
+    .swal2-html-container .password-wrapper input[type="password"]:focus,
+    .swal2-html-container .password-wrapper input[type="text"]:focus {
+        outline: none !important;
+        border-bottom: 2px solid var(--input-focus-border-light) !important; /* Thicker border on focus */
+    }
+
+
+    body.dark .swal2-html-container input[type="email"],
+    body.dark .swal2-html-container .password-wrapper input[type="password"],
+    body.dark .swal2-html-container .password-wrapper input[type="text"] {
+        border-bottom-color: var(--input-border-dark) !important;
+        background-color: var(--input-bg-dark) !important;
+        color: var(--text-dark) !important;
+    }
+     body.dark .swal2-html-container input[type="email"]:focus,
+    body.dark .swal2-html-container .password-wrapper input[type="password"]:focus,
+    body.dark .swal2-html-container .password-wrapper input[type="text"]:focus {
+        border-bottom-color: var(--input-focus-border-dark) !important;
+    }
+
+    .swal2-popup {
+        font-family: var(--font-family-main) !important;
+    }
+    body.dark .swal2-popup {
+        background-color: var(--card-bg-dark) !important;
+        color: var(--text-dark) !important;
+    }
+    body.dark .swal2-title {
+        color: var(--text-dark) !important;
+    }
+     body.dark .swal2-html-container {
+        color: var(--text-dark) !important;
+    }
+    .swal2-html-container label {
+        display: block;
+        margin-bottom: 2px; /* Reduced margin */
+        text-align: left;
+        font-weight: 500;
+        font-size: 0.9em;
+        color: var(--text-light); /* Ensure label color matches theme */
+    }
+    body.dark .swal2-html-container label {
+        color: var(--text-dark);
+    }
+    .swal2-html-container h2 {
+        color: var(--button-bg-light) !important;
+        text-align: center;
+    }
+     body.dark .swal2-html-container h2 {
+        color: var(--button-bg-dark) !important;
+    }
+    .swal2-html-container h3 {
+        margin-top: 0;
+        margin-bottom: 20px; /* Increased margin */
+        font-weight: 600; /* Bolder */
+        font-size: 1.25rem; /* Slightly larger */
+        text-align: center;
+    }
+     .swal2-html-container .link-button {
+        font-size: 0.9em !important;
+        margin: 5px !important;
+    }
+    .swal2-html-container .password-wrapper {
+        margin: 0 0 15px 0 !important; /* Increased bottom margin */
+    }
+    .swal2-html-container button.swal2-confirm.swal2-styled,
+    .swal2-html-container button.google-login-btn {
+        width: 100% !important;
+        margin-top: 15px !important; /* Increased margin */
+        padding: 12px !important; /* Increased padding */
+        font-size: 1rem !important; /* Larger font */
+        border-radius: 8px !important;
+    }
+    .swal2-html-container #modal-auth-error {
+        margin-top: 15px !important;
+    }
+
+
+    .toggle-password-btn {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none !important;
+        border: none !important;
+        color: var(--text-light) !important;
+        cursor: pointer;
+        padding: 5px !important;
+        box-shadow: none !important;
+        opacity: 0.7 !important;
+    }
+    .toggle-password-btn:hover {
+        opacity: 1 !important;
+        color: var(--button-bg-light) !important;
+    }
+    body.dark .toggle-password-btn {
+        color: var(--text-dark) !important;
+    }
+     body.dark .toggle-password-btn:hover {
+        color: var(--button-bg-dark) !important;
+    }
+
+    .link-button {
+      background: none !important;
+      border: none !important;
+      color: var(--link-light) !important;
+      text-decoration: underline !important;
+      cursor: pointer !important;
+      padding: 5px !important;
+      font-size: 0.9em !important;
+      margin: 8px 5px !important;
+      font-weight: 500; 
+      box-shadow: none !important;
+      transition: color 0.2s ease;
+    }
+    .link-button:hover {
+        transform: none !important;
+        text-decoration: none !important;
+        color: var(--button-hover-bg-light) !important;
+    }
+    body.dark .link-button {
+      color: var(--link-dark) !important;
+    }
+    body.dark .link-button:hover {
+      color: var(--button-hover-bg-dark) !important;
+    }
+
+    #auth-error { /* This is for the modal now */
+      margin-top: 10px;
+      font-size: 0.9em;
+      min-height: 1.2em; 
+      color: #e53e3e;
+      font-weight: 600;
+      text-align: center;
+    }
+    hr {
+      width: 80%; 
+      max-width: 400px;
+      margin: 30px auto; 
+      border: 0;
+      border-top: 1px solid var(--cell-border-light);
+    }
+    body.dark hr {
+      border-top: 1px solid var(--cell-border-dark);
+    }
+
+    .user-email-display {
+        font-size: 0.9rem; 
+        color: var(--user-email-display-color-light);
+        margin-top: 10px; 
+        margin-bottom: 10px; 
+        font-weight: 500;
+    }
+    body.dark .user-email-display {
+        color: var(--user-email-display-color-dark);
+    }
+    .menu-user-actions { 
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+        margin-bottom: 15px; 
+    }
+
+    #profile-page {
+        display: none; /* Hidden by default */
+        padding: 20px;
+        max-width: 500px;
+        margin: 20px auto;
+        background-color: var(--card-bg-light);
+        border-radius: 16px;
+        box-shadow: 0 8px 25px var(--card-shadow-light);
+    }
+    body.dark #profile-page {
+        background-color: var(--card-bg-dark);
+        box-shadow: 0 8px 25px var(--card-shadow-dark);
+    }
+    #profile-page h2 {
+        color: var(--button-bg-light);
+        margin-bottom: 20px;
+    }
+    body.dark #profile-page h2 {
+        color: var(--button-bg-dark);
+    }
+    #profile-page p {
+        margin-bottom: 10px;
+        font-size: 1rem;
+    }
+    #profile-page input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        border: 1px solid var(--input-border-light);
+        background-color: var(--input-bg-light);
+        color: var(--text-light);
+        font-family: var(--font-family-main);
+    }
+    body.dark #profile-page input[type="text"] {
+        background-color: var(--input-bg-dark);
+        border-color: var(--input-border-dark);
+        color: var(--text-dark);
+    }
+
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+        .menu h1 { font-size: 1.8rem; }
+        button { padding: 10px 15px; font-size: 0.9rem; }
+        .game-controls button { padding: 10px; } 
+        .game-stats { font-size: 0.85rem; padding: 10px; flex-direction: row; max-width: none;}
+    }
+    @media (max-width: 480px) {
+        body { padding: 0.8rem; padding-bottom: 70px; /* Ensure space for bottom nav */ }
+        .menu h1 { font-size: 1.6rem; }
+        button { padding: 8px 10px; font-size: 0.8rem; }
+        .game-controls button { padding: 8px; } 
+        .game-controls { gap: 5px; }
+        .game-stats { font-size: 0.8rem; padding: 8px; gap: 10px; max-width: 96%; flex-direction: column;}
+         #auth-container input[type="email"], 
+         .password-wrapper input[type="password"],
+         .password-wrapper input[type="text"] {
+            padding: 10px 35px 10px 12px; 
+            font-size: 0.9rem;
+        }
+    }
+
+    /* Bottom Navigation Bar Styles */
+    #bottom-nav {
+        display: flex; 
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: var(--bottom-nav-bg-light);
+        border-top: 1px solid var(--bottom-nav-border-light);
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        padding: 5px 0;
+        z-index: 1000;
+    }
+    body.dark #bottom-nav {
+        background-color: var(--bottom-nav-bg-dark);
+        border-top: 1px solid var(--bottom-nav-border-dark);
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+    }
+    #bottom-nav ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: space-around; 
+        width: 100%; 
+        max-width: 600px; /* Max width for more items */
+    }
+    #bottom-nav li {
+        flex-grow: 1;
+        text-align: center; 
+    }
+    #bottom-nav button {
+        background: none;
+        border: none;
+        color: var(--bottom-nav-icon-light);
+        font-size: 10px; 
+        padding: 8px 5px; 
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        transition: color 0.2s ease;
+    }
+    #bottom-nav button i {
+        font-size: 18px; 
+        margin-bottom: 2px;
+        margin-right: 0; 
+    }
+    #bottom-nav button.active {
+        color: var(--bottom-nav-icon-active-light);
+    }
+    body.dark #bottom-nav button {
+        color: var(--bottom-nav-icon-dark);
+    }
+    body.dark #bottom-nav button.active {
+        color: var(--bottom-nav-icon-active-dark);
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="menu">
+    <h1>🎯 Tango Game</h1>
+
+    <div class="difficulty-selector">
+        <label for="difficulty-level">Difficulty:</label>
+        <select id="difficulty-level">
+            <option value="4x4">Very Easy (4x4)</option>
+            <option value="6x6" selected>Easy (6x6)</option>
+            <option value="8x8">Medium (8x8)</option>
+            <option value="10x10">Hard (10x10)</option>
+            <option value="12x12">Expert (12x12)</option>
+        </select>
+    </div>
+    
+    <div id="user-email-under-leaderboard" class="user-email-display" style="display:none;"></div>
+    </div>
+
+  <div id="game" style="display:none;">
+    <div class="game-stats">
+      <div id="timer-stat">
+        <i class="fas fa-clock"></i>
+        <span id="timer">Time: 00:00</span>
+      </div>
+      <div id="moves-stat">
+        <i class="fas fa-shoe-prints"></i>
+        <span id="moves">Moves: 0</span>
+      </div>
+      <div id="difficulty-display">Difficulty: Easy (6x6)</div>
+    </div>
+    <div id="game-board" class="board">
+        </div>
+
+    <div class="game-controls">
+      <button id="hint-btn" class="hint-button icon-only" title="Hint"><i class="fas fa-search-plus"></i></button>
+      <button id="delete-btn" class="icon-only" title="Delete"><i class="fas fa-trash"></i></button>
+      <button id="undo" class="undo-button icon-only" title="Undo"><i class="fas fa-undo"></i></button>
+      <button id="redo-btn" class="redo-button icon-only" title="Redo"><i class="fas fa-redo"></i></button> 
+      <button id="highlight-errors-btn" class="icon-only" title="Highlight Errors"><i class="fas fa-bolt"></i></button>
+      <button id="check-btn" class="icon-only" title="Check Puzzle"><i class="fas fa-check-double"></i></button>
+      <button id="end-game" disabled title="End Game"><i class="fas fa-flag-checkered"></i> Finish</button>
+    </div>
+  </div>
+
+  <div id="leaderboard" class="card-style" style="display:none;"> 
+    <h2>🏆 Global Leaderboard</h2>
+    <div class="leaderboard-filter">
+        <label for="leaderboard-difficulty-filter">Filter by Difficulty:</label>
+        <select id="leaderboard-difficulty-filter">
+            <option value="all">All Difficulties</option>
+            <option value="4x4">Very Easy (4x4)</option>
+            <option value="6x6">Easy (6x6)</option>
+            <option value="8x8">Medium (8x8)</option>
+            <option value="10x10">Hard (10x10)</option>
+            <option value="12x12">Expert (12x12)</option>
+        </select>
+    </div>
+    <ol id="leaderboard-list"></ol>
+    <button id="clear-leaderboard-btn" style="display:none; margin-top: 15px;"><i class="fas fa-trash-alt"></i> Clear Leaderboard</button>
+    <button id="hide-leaderboard-btn" style="margin-top: 10px;">Close</button>
+  </div>
+
+  <div id="profile-page" class="card-style" style="display:none;">
+    <h2>👤 My Profile</h2>
+    <p>Email: <span id="profile-email-display"></span></p>
+    <div style="margin-bottom: 15px;">
+        <label for="profile-display-name-input" style="display:block; margin-bottom:5px; text-align:left;">Display Name:</label>
+        <input type="text" id="profile-display-name-input" placeholder="Enter your display name" style="width:100%; padding:10px; border:1px solid var(--input-border-light); border-radius:6px; box-sizing:border-box;">
+    </div>
+    <button id="update-profile-display-name-btn" style="width:100%; max-width:250px; margin:0 auto 10px auto;">Save Display Name</button>
+    </div>
+
+
+  <div id="bottom-nav"> 
+    <ul>
+        <li><button id="nav-menu-btn" class="icon-only active" title="Menu"><i class="fas fa-home"></i>Home</button></li>
+        <li><button id="nav-game-btn" class="icon-only" title="Play Game"><i class="fas fa-play"></i>Play</button></li> 
+        <li><button id="nav-leaderboard-btn" class="icon-only" title="Leaderboard"><i class="fas fa-trophy"></i>Scores</button></li>
+        <li><button id="nav-theme-btn" class="icon-only" title="Toggle Theme"><i class="fas fa-moon"></i><span>Dark</span></button></li> 
+        <li><button id="nav-auth-btn" class="icon-only" title="Login/Profile"><i class="fas fa-sign-in-alt"></i><span>Login</span></button></li>
+        <li><button id="nav-logout-btn" class="icon-only" title="Logout" style="display:none;"><i class="fas fa-sign-out-alt"></i><span>Logout</span></button></li>
+    </ul>
+  </div>
+
+
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+
+  <script>
+    // --- START OF SCRIPT ---
+    // ... (JavaScript from previous version, with modifications in DOMContentLoaded and initAuthUI for new buttons)
+    // ... (The script is quite long, so I'm not embedding it again for brevity,
+    //      but it's the script from "Tango Game - Expanded Profile Options" with further UI logic adjustments)
+    // --- Key modifications for this step are in DOMContentLoaded and relevant show/hide functions ---
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCAAifWz9fEE3MwVkuGqK72oXgnm5iZOxg",
+      authDomain: "tango-674e5.firebaseapp.com",
+      projectId: "tango-674e5",
+      storageBucket: "tango-674e5.appspot.com", 
+      messagingSenderId: "661261184992",
+      appId: "1:661261184992:web:d8fde8e0e16fe60e0bc585",
+      measurementId: "G-5FH7N1G5CE"
+    };
+
+    let db, auth; 
+    let firebaseInitialized = false; 
+    let firebaseFailedToInit = false; 
+
+    try {
+      if (!firebase.apps.length) { 
+          firebase.initializeApp(firebaseConfig); 
+          console.log("Firebase initialized successfully with provided config.");
+      } else {
+          firebase.app(); 
+          console.log("Firebase was already initialized.");
+      }
+      
+      db = firebase.firestore(); 
+      auth = firebase.auth();   
+      firebaseInitialized = true;
+    } catch (e) {
+      console.error("Firebase initialization error with provided config:", e);
+      firebaseInitialized = false;
+      firebaseFailedToInit = true;
+    }
+
+    let startTime;
+    let endTime;
+    let moveCount = 0;
+    let hintsUsedThisGame = 0; 
+    let timerInterval;
+    let fullGridSolution;
+    let moveHistory = [];
+    let redoHistory = []; 
+    let lastActiveCell = null; 
+    let isHighlightActive = false; 
+    
+    const difficultySettings = {
+        "4x4":   { size: 4,  name: "Very Easy", scoreDivisor: 0.75, hintTimePenalty: 5,  errorTimePenalty: 3,  cellSize: 55, totalSize: 55, fontSize: 28, totalFontSize: 16 },
+        "6x6":   { size: 6,  name: "Easy",      scoreDivisor: 1.0,  hintTimePenalty: 10, errorTimePenalty: 5,  cellSize: 48, totalSize: 48, fontSize: 24, totalFontSize: 14 },
+        "8x8":   { size: 8,  name: "Medium",    scoreDivisor: 1.25, hintTimePenalty: 15, errorTimePenalty: 8,  cellSize: 40, totalSize: 40, fontSize: 20, totalFontSize: 12 },
+        "10x10": { size: 10, name: "Hard",      scoreDivisor: 1.5,  hintTimePenalty: 20, errorTimePenalty: 10, cellSize: 34, totalSize: 34, fontSize: 16, totalFontSize: 10 },
+        "12x12": { size: 12, name: "Expert",    scoreDivisor: 1.75, hintTimePenalty: 25, errorTimePenalty: 12, cellSize: 28, totalSize: 28, fontSize: 14, totalFontSize: 8  }
+    };
+    let currentDifficultyKey = "6x6"; 
+
+    const MOVE_SCORE_VALUE = 1; 
+    const HINT_SCORE_VALUE = 30; 
+
+    function getCurrentDifficulty() {
+        return difficultySettings[currentDifficultyKey];
+    }
+
+
+    function generateFullGrid(size) {
+      const grid = Array(size).fill(null).map(() => Array(size).fill(null));
+      
+      function isValidForSolver(currentGrid, r, c, num) {
+        let tempGrid = currentGrid.map(arr => arr.slice()); 
+        tempGrid[r][c] = num;
+        const currentSize = tempGrid.length; 
+
+        let rowCount = 0;
+        for(let k=0; k<currentSize; k++) if(tempGrid[r][k] === num) rowCount++;
+        if (rowCount > currentSize / 2) return false;
+
+        let colCount = 0;
+        for (let i = 0; i < currentSize; i++) if (tempGrid[i][c] === num) colCount++;
+        if (colCount > currentSize / 2) return false;
+
+        for (let k = 0; k <= currentSize - 3; k++) {
+            if (tempGrid[r][k] === num && tempGrid[r][k+1] === num && tempGrid[r][k+2] === num) return false;
+        }
+        for (let k = 0; k <= currentSize - 3; k++) {
+             if (tempGrid[k][c] === num && tempGrid[k+1][c] === num && tempGrid[k+2][c] === num) return false;
+        }
+        return true;
+    }
+
+      function solve(r = 0, c = 0) {
+        const currentSize = grid.length;
+        if (r === currentSize) { 
+            for(let i=0; i<currentSize; i++){
+                let rowZeros = 0, rowOnes = 0, colZeros = 0, colOnes = 0;
+                for(let j=0; j<currentSize; j++){
+                    if(grid[i][j] === 0) rowZeros++; else if(grid[i][j] === 1) rowOnes++;
+                    if(grid[j][i] === 0) colZeros++; else if(grid[j][i] === 1) colOnes++;
+                }
+                if(rowZeros !== currentSize/2 || rowOnes !== currentSize/2 || colZeros !== currentSize/2 || colOnes !== currentSize/2) {
+                    return false; 
+                }
+            }
+            return true; 
+        }
+
+        let next_r = r, next_c = c + 1;
+        if (next_c === currentSize) {
+            next_r = r + 1;
+            next_c = 0;
+        }
+
+        const numbersToTry = [0, 1].sort(() => Math.random() - 0.5);
+        for (const num of numbersToTry) {
+          if (isValidForSolver(grid, r, c, num)) {
+            grid[r][c] = num; 
+            if (solve(next_r, next_c)) return true;
+            grid[r][c] = null; 
+          }
+        }
+        return false;
+      }
+      
+      let attempts = 0;
+      const maxAttempts = (size > 8) ? 5000 : 3000; 
+      while(attempts < maxAttempts) {
+        for(let i=0; i<size; i++) for(let j=0; j<size; j++) grid[i][j] = null; 
+        if (solve()) {
+            return grid; 
+        }
+        attempts++;
+      }
+      console.error(`Failed to generate a valid grid of size ${size}x${size} after ${maxAttempts} attempts.`);
+      throw new Error(`Could not generate a valid ${size}x${size} grid.`);
+    }
+
+    function maskGrid(sourceGrid, revealRatio = 0.45) {
+      const masked = sourceGrid.map(row => row.slice());
+      const size = sourceGrid.length;
+      const minVisiblePerRow = Math.max(1, Math.floor(size * (size <= 4 ? 0.4 : size === 6 ? 0.3 : size === 8 ? 0.25 : 0.22) )); 
+
+      for (let i = 0; i < size; i++) {
+        let revealedInRow = 0;
+        const revealOrder = Array.from({length: size}, (_, k) => k).sort(() => Math.random() - 0.5);
+
+        for (let j = 0; j < size; j++) { 
+          if (Math.random() < revealRatio) {
+            revealedInRow++;
+          } else {
+            masked[i][j] = "";
+          }
+        }
+        for (const colIndex of revealOrder) {
+            if (revealedInRow >= minVisiblePerRow) break;
+            if (masked[i][colIndex] === "") {
+                masked[i][colIndex] = sourceGrid[i][colIndex];
+                revealedInRow++;
+            }
+        }
+        if (revealedInRow < minVisiblePerRow) {
+            for (const colIndex of revealOrder) {
+                if (revealedInRow >= minVisiblePerRow) break;
+                if (masked[i][colIndex] === "") {
+                     masked[i][colIndex] = sourceGrid[i][colIndex];
+                     revealedInRow++;
+                }
+            }
+        }
+      }
+      return masked;
+    }
+    
+    function applyGridStyles(difficulty) {
+        const cells = document.querySelectorAll('.cell, .row-total, .cell-total');
+        cells.forEach(cell => {
+            if (cell.classList.contains('cell')) {
+                cell.style.width = `${difficulty.cellSize}px`;
+                cell.style.height = `${difficulty.cellSize}px`;
+                cell.style.fontSize = `${difficulty.fontSize}px`;
+            } else { // Totals
+                cell.style.width = `${difficulty.totalSize}px`;
+                cell.style.height = `${difficulty.totalSize}px`;
+                cell.style.fontSize = `${difficulty.totalFontSize}px`;
+            }
+        });
+    }
+
+
+    function initGrid() {
+      const difficulty = getCurrentDifficulty();
+      const size = difficulty.size;
+      console.log(`Initializing grid UI for ${difficulty.name} (${size}x${size})`);
+
+      try {
+        fullGridSolution = generateFullGrid(size);
+      } catch (error) {
+        console.error("Error during grid generation in initGrid:", error);
+        Swal.fire({ icon: 'error', title: 'Grid Generation Error', text: `Critical Error: Could not generate the ${difficulty.name} game grid. Please try again or select a different difficulty.` });
+        resetGameAndShowMenu();
+        return;
+      }
+
+      const visibleGrid = maskGrid(fullGridSolution, 0.45); 
+      const gameBoard = document.getElementById("game-board");
+      if (!gameBoard) {
+        console.error("Game board element not found!");
+        return;
+      }
+      gameBoard.innerHTML = "";
+      
+      applyGridStyles(difficulty); 
+
+      for (let i = 0; i < size; i++) {
+        const rowEl = document.createElement("div");
+        rowEl.className = "row";
+        const rowContainer = document.createElement("div");
+        rowContainer.style.display = "flex";
+        rowContainer.style.alignItems = "center";
+
+        for (let j = 0; j < size; j++) {
+          const cell = document.createElement("div");
+          cell.className = "cell";
+          cell.dataset.row = i;
+          cell.dataset.col = j;
+          cell.style.width = `${difficulty.cellSize}px`;
+          cell.style.height = `${difficulty.cellSize}px`;
+          cell.style.fontSize = `${difficulty.fontSize}px`;
+
+          const val = visibleGrid[i][j];
+          cell.dataset.value = val === "" ? "" : val.toString(); // Store underlying value
+
+          if (val === 0) {
+            cell.innerHTML = '<i class="far fa-circle"></i>';
+            cell.classList.add("fixed");
+          } else if (val === 1) {
+            cell.innerHTML = '<i class="fas fa-circle"></i>';
+            cell.classList.add("fixed");
+          } else {
+            cell.innerHTML = ''; // Empty or 'x'
+            cell.addEventListener("click", () => handleCellClick(cell));
+          }
+          rowEl.appendChild(cell);
+        }
+        const rowTotalEl = document.createElement("div");
+        rowTotalEl.className = "row-total";
+        rowTotalEl.setAttribute("data-row-total", i);
+        rowTotalEl.style.width = `${difficulty.totalSize}px`;
+        rowTotalEl.style.height = `${difficulty.totalSize}px`;
+        rowTotalEl.style.fontSize = `${difficulty.totalFontSize}px`;
+
+        rowContainer.appendChild(rowEl);
+        rowContainer.appendChild(rowTotalEl);
+        gameBoard.appendChild(rowContainer);
+      }
+
+      const verticalTotalsContainer = document.createElement("div");
+      verticalTotalsContainer.className = "totals-container";
+      verticalTotalsContainer.style.display = "flex";
+
+      for (let j = 0; j < size; j++) {
+        const colTotalEl = document.createElement("div");
+        colTotalEl.className = "cell-total";
+        colTotalEl.setAttribute("data-col-total", j);
+        colTotalEl.style.width = `${difficulty.totalSize}px`;
+        colTotalEl.style.height = `${difficulty.totalSize}px`;
+        colTotalEl.style.fontSize = `${difficulty.totalFontSize}px`;
+        verticalTotalsContainer.appendChild(colTotalEl);
+      }
+      gameBoard.appendChild(verticalTotalsContainer);
+      updateAllTotals();
+      updateUndoRedoButtons();
+      console.log("Grid UI initialized.");
+    }
+
+    function updateRowDisplayTotal(rowIndex) {
+      const difficulty = getCurrentDifficulty();
+      const size = difficulty.size;
+      const rowTotalEl = document.querySelector(`.row-total[data-row-total="${rowIndex}"]`);
+      if (!rowTotalEl) return;
+      let zeros = 0, ones = 0;
+      document.querySelectorAll(`.cell[data-row="${rowIndex}"]`).forEach(cell => {
+        if (cell.dataset.value === "0") zeros++;
+        if (cell.dataset.value === "1") ones++;
+      });
+      rowTotalEl.innerHTML = `<div class="total-value">${zeros}</div><div class="total-value">${ones}</div>`;
+      
+      const isFull = zeros + ones === size;
+      const isBalanced = zeros === size / 2 && ones === size / 2;
+
+      rowTotalEl.classList.toggle("complete", isFull && isBalanced);
+      rowTotalEl.classList.toggle("error-sum", isFull && !isBalanced);
+    }
+
+    function updateColDisplayTotal(colIndex) {
+      const difficulty = getCurrentDifficulty();
+      const size = difficulty.size;
+      const colTotalEl = document.querySelector(`.cell-total[data-col-total="${colIndex}"]`);
+      if (!colTotalEl) return;
+      let zeros = 0, ones = 0;
+      document.querySelectorAll(`.cell[data-col="${colIndex}"]`).forEach(cell => {
+        if (cell.dataset.value === "0") zeros++;
+        if (cell.dataset.value === "1") ones++;
+      });
+      colTotalEl.innerHTML = `<div class="total-value">${zeros}</div><div class="total-value">${ones}</div>`;
+
+      const isFull = zeros + ones === size;
+      const isBalanced = zeros === size / 2 && ones === size / 2;
+
+      colTotalEl.classList.toggle("complete", isFull && isBalanced);
+      colTotalEl.classList.toggle("error-sum", isFull && !isBalanced);
+    }
+
+    function updateAllTotals() {
+      const size = getCurrentDifficulty().size;
+      for (let i = 0; i < size; i++) {
+        updateRowDisplayTotal(i);
+        updateColDisplayTotal(i);
+      }
+    }
+
+    function updateUndoRedoButtons() {
+        const undoButton = document.getElementById('undo');
+        const redoButton = document.getElementById('redo-btn');
+        const deleteButton = document.getElementById('delete-btn');
+
+        if (undoButton) undoButton.disabled = moveHistory.length === 0;
+        if (redoButton) redoButton.disabled = redoHistory.length === 0;
+        if (deleteButton) deleteButton.disabled = !lastActiveCell || lastActiveCell.classList.contains('fixed') || !lastActiveCell.dataset.value;
+    }
+    
+    function setActiveNav(activeView) {
+        const views = ['menu', 'game', 'leaderboard', 'theme', 'auth', 'profile']; 
+        views.forEach(view => {
+            const btn = document.getElementById(`nav-${view}-btn`);
+            if (btn) btn.classList.remove('active');
+        });
+        
+        const activeBtn = document.getElementById(`nav-${activeView}-btn`);
+        if (activeBtn) activeBtn.classList.add('active');
+    }
+
+    function showView(viewId) {
+        document.querySelector('.menu').style.display = 'none';
+        document.getElementById('game').style.display = 'none';
+        document.getElementById('leaderboard').style.display = 'none';
+        document.getElementById('profile-page').style.display = 'none'; 
+        
+        const bottomNav = document.getElementById('bottom-nav');
+        if (bottomNav) bottomNav.style.display = 'flex'; 
+
+        if (viewId === 'menu') {
+            document.querySelector('.menu').style.display = 'block';
+            setActiveNav('menu');
+        } else if (viewId === 'game') {
+            document.getElementById('game').style.display = 'block';
+            setActiveNav('game');
+        } else if (viewId === 'leaderboard') {
+            document.getElementById('leaderboard').style.display = 'block';
+            displayLeaderboard(); 
+            setActiveNav('leaderboard');
+        } else if (viewId === 'profile') {
+            document.getElementById('profile-page').style.display = 'block';
+            loadProfileData();
+            setActiveNav('auth'); // Keep auth button active for profile
+        }
+    }
+
+
+    function startGame() {
+      const difficultySelector = document.getElementById('difficulty-level');
+      currentDifficultyKey = difficultySelector.value;
+      const difficulty = getCurrentDifficulty();
+
+      console.log(`Starting game with difficulty: ${difficulty.name} (${difficulty.size}x${difficulty.size})`);
+      
+      moveCount = 0;
+      hintsUsedThisGame = 0; 
+      moveHistory = [];
+      redoHistory = []; 
+      lastActiveCell = null;
+      isHighlightActive = false;
+      document.querySelectorAll('.cell.highlight').forEach(c => c.classList.remove('highlight'));
+
+
+      const movesEl = document.getElementById("moves");
+      if(movesEl) movesEl.textContent = `Moves: ${moveCount}`;
+      
+      const difficultyDisplayEl = document.getElementById("difficulty-display");
+      if(difficultyDisplayEl) difficultyDisplayEl.textContent = `Difficulty: ${difficulty.name} (${difficulty.size}x${difficulty.size})`;
+      
+      showView('game'); 
+
+      startTime = Date.now();
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(updateTimer, 1000);
+      const timerEl = document.getElementById("timer");
+      if(timerEl) timerEl.textContent = "Time: 00:00";
+
+      initGrid(); 
+      const endGameButton = document.getElementById("end-game");
+      if (endGameButton) {
+        endGameButton.disabled = true;
+        endGameButton.classList.remove("enabled");
+      }
+      const hintButton = document.getElementById("hint-btn");
+      if(hintButton) hintButton.disabled = false; 
+      console.log("Game started.");
+    }
+
+    function handleCellClick(cell) {
+      if (cell.classList.contains("fixed")) return;
+      lastActiveCell = cell; 
+
+      moveHistory.push({
+        cellRef: cell,
+        previousValue: cell.dataset.value, // Store data-value
+        previousMoveCount: moveCount 
+      });
+      redoHistory = []; 
+      
+      cell.classList.remove('value-x'); 
+
+      let nextValue;
+      let nextHTML;
+
+      if (cell.dataset.value === "") {
+          nextValue = "1";
+          nextHTML = '<i class="fas fa-circle"></i>';
+      } else if (cell.dataset.value === "1") {
+          nextValue = "0";
+          nextHTML = '<i class="far fa-circle"></i>';
+      } else if (cell.dataset.value === "0") {
+          nextValue = "x";
+          nextHTML = "x";
+          cell.classList.add('value-x'); 
+      } else { // Was "x"
+          nextValue = "";
+          nextHTML = "";
+      }
+      cell.dataset.value = nextValue;
+      cell.innerHTML = nextHTML;
+
+      moveCount++;
+      const movesEl = document.getElementById("moves");
+      if(movesEl) movesEl.textContent = `Moves: ${moveCount}`;
+
+      updateAllTotals();
+      checkGridCompletion();
+      updateUndoRedoButtons();
+      if(isHighlightActive) handleHighlightClick(false); 
+    }
+
+    function undoLastMove() {
+      if (moveHistory.length === 0) {
+        return;
+      }
+      const lastAction = moveHistory.pop();
+      lastActiveCell = lastAction.cellRef; 
+
+      redoHistory.push({ 
+          cellRef: lastAction.cellRef,
+          valueToRestore: lastAction.cellRef.dataset.value, // Store current data-value for redo
+          moveCountToRestore: moveCount 
+      }); 
+
+      lastAction.cellRef.dataset.value = lastAction.previousValue; // Restore data-value
+      if (lastAction.previousValue === "1") lastAction.cellRef.innerHTML = '<i class="fas fa-circle"></i>';
+      else if (lastAction.previousValue === "0") lastAction.cellRef.innerHTML = '<i class="far fa-circle"></i>';
+      else if (lastAction.previousValue === "x") lastAction.cellRef.innerHTML = 'x';
+      else lastAction.cellRef.innerHTML = '';
+      
+      lastAction.cellRef.classList.remove('value-x');
+      if(lastAction.previousValue === 'x') {
+          lastAction.cellRef.classList.add('value-x');
+      }
+
+      moveCount = lastAction.previousMoveCount; 
+      
+      const movesEl = document.getElementById("moves");
+      if(movesEl) movesEl.textContent = `Moves: ${moveCount}`;
+
+      updateAllTotals();
+      checkGridCompletion();
+      updateUndoRedoButtons();
+      if(isHighlightActive) handleHighlightClick(false);
+    }
+
+    function redoLastMove() {
+        if (redoHistory.length === 0) {
+            return;
+        }
+        const actionToRedo = redoHistory.pop();
+        lastActiveCell = actionToRedo.cellRef; 
+        
+        moveHistory.push({ 
+            cellRef: actionToRedo.cellRef,
+            previousValue: actionToRedo.cellRef.dataset.value, // Store current data-value for undo
+            previousMoveCount: moveCount
+        });
+
+        actionToRedo.cellRef.dataset.value = actionToRedo.valueToRestore; // Restore data-value
+        if (actionToRedo.valueToRestore === "1") actionToRedo.cellRef.innerHTML = '<i class="fas fa-circle"></i>';
+        else if (actionToRedo.valueToRestore === "0") actionToRedo.cellRef.innerHTML = '<i class="far fa-circle"></i>';
+        else if (actionToRedo.valueToRestore === "x") actionToRedo.cellRef.innerHTML = 'x';
+        else actionToRedo.cellRef.innerHTML = '';
+        
+        actionToRedo.cellRef.classList.remove('value-x');
+        if(actionToRedo.valueToRestore === 'x') {
+            actionToRedo.cellRef.classList.add('value-x');
+        }
+        
+        moveCount = actionToRedo.moveCountToRestore; 
+
+        const movesEl = document.getElementById("moves");
+        if(movesEl) movesEl.textContent = `Moves: ${moveCount}`;
+
+        updateAllTotals();
+        checkGridCompletion();
+        updateUndoRedoButtons();
+        if(isHighlightActive) handleHighlightClick(false);
+    }
+    
+    function handleDeleteClick() {
+        if (lastActiveCell && !lastActiveCell.classList.contains('fixed') && lastActiveCell.dataset.value !== "") {
+            moveHistory.push({
+                cellRef: lastActiveCell,
+                previousValue: lastActiveCell.dataset.value,
+                previousMoveCount: moveCount
+            });
+            redoHistory = []; 
+
+            lastActiveCell.dataset.value = "";
+            lastActiveCell.innerHTML = "";
+            lastActiveCell.classList.remove('value-x');
+            moveCount++; 
+            
+            const movesEl = document.getElementById("moves");
+            if(movesEl) movesEl.textContent = `Moves: ${moveCount}`;
+
+            updateAllTotals();
+            checkGridCompletion();
+            updateUndoRedoButtons();
+            if(isHighlightActive) handleHighlightClick(false);
+        } else {
+            console.log("Delete: No active non-fixed cell with content to delete.");
+        }
+    }
+
+    function handleHighlightClick(toggle = true) { 
+        if (toggle) isHighlightActive = !isHighlightActive; 
+        const cells = document.querySelectorAll(".cell:not(.fixed)");
+
+        if (isHighlightActive) {
+            console.log("Highlighting errors...");
+            cells.forEach(cell => {
+                if (cell.dataset.value !== "" && cell.dataset.value !== "x") {
+                    const r = parseInt(cell.dataset.row);
+                    const c = parseInt(cell.dataset.col);
+                    if (fullGridSolution && cell.dataset.value !== fullGridSolution[r][c].toString()) { 
+                        cell.classList.add("highlight"); 
+                    } else {
+                        cell.classList.remove("highlight");
+                    }
+                } else {
+                    cell.classList.remove("highlight");
+                }
+            });
+        } else {
+            console.log("Clearing highlights...");
+            cells.forEach(cell => cell.classList.remove("highlight"));
+        }
+    }
+
+    function handleCheckClick() {
+        if (!fullGridSolution) return;
+        let allCorrectAndFilled = true;
+        let hasErrors = false;
+        const cells = document.querySelectorAll(".cell"); 
+
+        cells.forEach(cell => {
+            cell.classList.remove("error"); 
+            if (!cell.classList.contains("fixed")) {
+                if (cell.dataset.value === "" || cell.dataset.value === "x") {
+                    allCorrectAndFilled = false; 
+                } else {
+                    const r = parseInt(cell.dataset.row);
+                    const c = parseInt(cell.dataset.col);
+                    if (cell.dataset.value !== fullGridSolution[r][c].toString()) {
+                        allCorrectAndFilled = false;
+                        hasErrors = true;
+                        cell.classList.add("error"); 
+                    }
+                }
+            }
+        });
+
+        if (allCorrectAndFilled) {
+            Swal.fire({ title: 'Congratulations!', text: 'Puzzle Solved!', icon: 'success' });
+            handleEndGame();
+        } else if (hasErrors) {
+            Swal.fire({ title: 'Oops...', text: 'Some cells are incorrect. Errors have been highlighted temporarily.', icon: 'error' });
+            setTimeout(() => { 
+                 document.querySelectorAll(".cell.error").forEach(cell => cell.classList.remove("error"));
+            }, 3000);
+        } else { 
+            Swal.fire({ title: 'Keep Going!', text: "So far so good, but the puzzle isn't complete yet!", icon: 'info' });
+        }
+    }
+
+
+    function confirmAndResetGame() { 
+      Swal.fire({
+        title: 'Restart Game?',
+        text: "Are you sure you want to restart the current game? This action cannot be undone.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, restart it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          startGame(); 
+        }
+      })
+    }
+
+    function toggleTheme() {
+      const body = document.body;
+      body.classList.toggle("dark");
+      const navThemeBtn = document.getElementById("nav-theme-btn");
+      if(navThemeBtn) {
+        const icon = navThemeBtn.querySelector('i');
+        const textSpan = navThemeBtn.querySelector('span'); 
+        if (body.classList.contains("dark")) {
+            if(icon) icon.className = 'fas fa-sun'; 
+            if(textSpan) textSpan.textContent = "Light";
+            navThemeBtn.title = "Light Mode";
+        } else {
+            if(icon) icon.className = 'fas fa-moon'; 
+            if(textSpan) textSpan.textContent = "Dark";
+            navThemeBtn.title = "Dark Mode";
+        }
+      }
+    }
+
+    function updateTimer() {
+      if (!startTime) return;
+      const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+      const minutes = Math.floor(elapsedTime / 60);
+      const seconds = elapsedTime % 60;
+      const timerEl = document.getElementById("timer");
+      if(timerEl) timerEl.textContent = `Time: ${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+    }
+
+    function resetGameAndShowMenu() {
+      console.log("resetGameAndShowMenu called");
+      moveHistory = [];
+      redoHistory = [];
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = null;
+      
+      showView('menu'); 
+
+      const movesEl = document.getElementById("moves");
+      if(movesEl) movesEl.textContent = "Moves: 0";
+      const timerEl = document.getElementById("timer");
+      if(timerEl) timerEl.textContent = "Time: 00:00";
+      
+      moveCount = 0;
+      hintsUsedThisGame = 0;
+      startTime = null;
+      endTime = null;
+      fullGridSolution = null;
+      lastActiveCell = null;
+      isHighlightActive = false;
+      const gameBoard = document.getElementById("game-board");
+      if (gameBoard) gameBoard.innerHTML = "";
+      updateUndoRedoButtons();
+    }
+
+    function showHint() { 
+      if (!fullGridSolution) {
+        Swal.fire({ title: 'Oops!', text: "The game hasn't started or the solution is not available.", icon: 'info' });
+        return;
+      }
+      const hintButton = document.getElementById("hint-btn");
+      if (hintButton && hintButton.disabled) return; 
+
+      const emptyCells = [];
+      document.querySelectorAll(".cell:not(.fixed)").forEach(cell => {
+        if (cell.dataset.value === "" || cell.dataset.value === "x") emptyCells.push(cell); 
+      });
+
+      if (emptyCells.length === 0) {
+        Swal.fire({ title: 'All Filled!', text: "All cells are filled with 0 or 1!", icon: 'info' });
+        return;
+      }
+
+      const randomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+      const r = parseInt(randomCell.dataset.row);
+      const c = parseInt(randomCell.dataset.col);
+      const correctValue = fullGridSolution[r][c].toString();
+
+      moveHistory.push({
+          cellRef: randomCell,
+          previousValue: randomCell.dataset.value, 
+          previousMoveCount: moveCount
+      });
+      redoHistory = []; 
+
+      randomCell.dataset.value = correctValue;
+      if (correctValue === "1") randomCell.innerHTML = '<i class="fas fa-circle"></i>';
+      else if (correctValue === "0") randomCell.innerHTML = '<i class="far fa-circle"></i>';
+      
+      randomCell.classList.remove('value-x'); 
+      randomCell.classList.add('fixed'); 
+      randomCell.style.backgroundColor = ''; 
+      lastActiveCell = randomCell;
+
+
+      moveCount++;
+      hintsUsedThisGame++; 
+      const movesEl = document.getElementById("moves");
+      if(movesEl) movesEl.textContent = `Moves: ${moveCount}`;
+
+      updateAllTotals();
+      checkGridCompletion();
+      updateUndoRedoButtons();
+
+      const difficulty = getCurrentDifficulty();
+      if (startTime) startTime -= (difficulty.hintTimePenalty * 1000); 
+      updateTimer();
+
+      if(hintButton) {
+          hintButton.disabled = true;
+          setTimeout(() => {
+              if(hintButton) hintButton.disabled = false;
+          }, 5000); 
+      }
+    }
+
+    function checkGridCompletion() {
+      const isComplete = Array.from(document.querySelectorAll(".cell:not(.fixed)")).every(
+          cell => cell.dataset.value === "0" || cell.dataset.value === "1"
+      );
+      const endGameButton = document.getElementById("end-game");
+      if (endGameButton) {
+        if (isComplete) {
+          endGameButton.disabled = false;
+          endGameButton.classList.add("enabled");
+        } else {
+          endGameButton.disabled = true;
+          endGameButton.classList.remove("enabled");
+        }
+      }
+    }
+    
+    function _attachAuthFormListenersInModal() {
+        // Login Form
+        document.getElementById('modal-login-button')?.addEventListener('click', () => {
+            const email = document.getElementById('modal-login-email').value;
+            const password = document.getElementById('modal-login-password').value;
+            const authErrorP = document.getElementById('modal-auth-error');
+            if (!email || !password) {
+                if(authErrorP) authErrorP.textContent = "Please enter email and password.";
+                return;
+            }
+            if (authErrorP) authErrorP.textContent = '';
+            auth.signInWithEmailAndPassword(email, password)
+                .then(() => Swal.close()) 
+                .catch(error => {
+                    console.error("Login Error (Modal):", error);
+                    if (authErrorP) authErrorP.textContent = "Login Error: " + error.message;
+                });
+        });
+
+        document.getElementById('modal-google-login-btn')?.addEventListener('click', () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            const authErrorP = document.getElementById('modal-auth-error');
+            auth.signInWithPopup(provider)
+                .then((result) => {
+                    console.log("Google Sign-In successful (Modal):", result.user);
+                    Swal.close(); 
+                })
+                .catch((error) => {
+                    console.error("Google Sign-In Error (Modal):", error);
+                    let userMessage = "Google Sign-In Error: " + error.message;
+                     if (error.code === 'auth/operation-not-supported-in-this-environment') {
+                        userMessage = 'Google Sign-In with popup is not supported in this preview environment. Please try standard email/password login, or test on a live server (http/https).';
+                    } else if (error.code === 'auth/popup-closed-by-user') {
+                        userMessage = 'Login popup closed before completion.';
+                    } else if (error.code === 'auth/popup-blocked') {
+                         userMessage = 'Login popup blocked by browser. Please allow popups.';
+                    }
+                    if (authErrorP) authErrorP.textContent = userMessage;
+                });
+        });
+
+        document.getElementById('modal-show-signup-form-button')?.addEventListener('click', () => {
+            document.getElementById('modal-login-form-content').style.display = 'none';
+            document.getElementById('modal-signup-form-content').style.display = 'block';
+            document.getElementById('modal-auth-error').textContent = '';
+        });
+
+        // Signup Form
+        document.getElementById('modal-signup-button')?.addEventListener('click', () => {
+            const email = document.getElementById('modal-signup-email').value;
+            const password = document.getElementById('modal-signup-password').value;
+            const authErrorP = document.getElementById('modal-auth-error');
+            if (!email || !password) {
+                if(authErrorP) authErrorP.textContent = "Please enter email and password."; return;
+            }
+            if (password.length < 6) {
+                if(authErrorP) authErrorP.textContent = "Password should be at least 6 characters."; return;
+            }
+            if (authErrorP) authErrorP.textContent = '';
+            auth.createUserWithEmailAndPassword(email, password)
+                .then(() => Swal.close()) 
+                .catch(error => {
+                    console.error("Signup Error (Modal):", error);
+                    if (authErrorP) authErrorP.textContent = "Signup Error: " + error.message;
+                });
+        });
+
+        document.getElementById('modal-show-login-form-button')?.addEventListener('click', () => {
+            document.getElementById('modal-signup-form-content').style.display = 'none';
+            document.getElementById('modal-login-form-content').style.display = 'block';
+            document.getElementById('modal-auth-error').textContent = '';
+        });
+
+        // Password Toggles for Modal
+        document.getElementById('modal-toggle-login-password')?.addEventListener('click', function() {
+            const passwordInput = document.getElementById('modal-login-password');
+            const icon = this.querySelector('i');
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash'); this.title = "Hide password";
+            } else {
+                passwordInput.type = "password";
+                icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); this.title = "Show password";
+            }
+        });
+        document.getElementById('modal-toggle-signup-password')?.addEventListener('click', function() {
+            const passwordInput = document.getElementById('modal-signup-password');
+            const icon = this.querySelector('i');
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash'); this.title = "Hide password";
+            } else {
+                passwordInput.type = "password";
+                icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); this.title = "Show password";
+            }
+        });
+    }
+
+
+    function showAuthModal() {
+        const authModalHTML = `
+            <div id="modal-auth-container" style="text-align:left; padding:10px;">
+                <h2 style="text-align:center; color: var(--button-bg-light);">Authentication</h2>
+                <div id="modal-login-form-content" style="display:block;">
+                    <h3 style="margin-top:0;">Login</h3>
+                    <label for="modal-login-email" style="display:block; margin-bottom:5px;">Email:</label>
+                    <input type="email" id="modal-login-email" placeholder="Email" autocomplete="email" />
+                    <label for="modal-login-password" style="display:block; margin-bottom:5px; margin-top:10px;">Password:</label>
+                    <div class="password-wrapper" style="margin:0 0 10px 0;">
+                        <input type="password" id="modal-login-password" placeholder="Password" autocomplete="current-password" />
+                        <button type="button" id="modal-toggle-login-password" class="toggle-password-btn icon-only" title="Show password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <button id="modal-login-button" class="swal2-confirm swal2-styled" style="background-color: var(--button-bg-light); color: var(--button-text-light); width:100%; margin-top:10px; padding:10px;">🔑 Log In</button>
+                    <button id="modal-google-login-btn" class="google-login-btn swal2-confirm swal2-styled" style="background-color: var(--google-btn-bg-light) !important; color: var(--button-text-light); width:100%; margin-top:10px; padding:10px;"><i class="fab fa-google"></i> Login with Google</button>
+                    <p style="text-align:center; margin-top:15px;">No account? <button type="button" id="modal-show-signup-form-button" class="link-button">Sign Up</button></p>
+                </div>
+                <div id="modal-signup-form-content" style="display:none;">
+                    <h3 style="margin-top:0;">Sign Up</h3>
+                    <label for="modal-signup-email" style="display:block; margin-bottom:5px;">Email:</label>
+                    <input type="email" id="modal-signup-email" placeholder="Email" autocomplete="email" />
+                    <label for="modal-signup-password" style="display:block; margin-bottom:5px; margin-top:10px;">Password:</label>
+                    <div class="password-wrapper" style="margin:0 0 10px 0;">
+                        <input type="password" id="modal-signup-password" placeholder="Password" autocomplete="new-password" />
+                        <button type="button" id="modal-toggle-signup-password" class="toggle-password-btn icon-only" title="Show password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <button id="modal-signup-button" class="swal2-confirm swal2-styled" style="background-color: var(--button-bg-light); color: var(--button-text-light); width:100%; margin-top:10px; padding:10px;">➕ Create Account</button>
+                    <p style="text-align:center; margin-top:15px;">Already have an account? <button type="button" id="modal-show-login-form-button" class="link-button">Log In</button></p>
+                </div>
+                <p id="modal-auth-error" style="color:red; margin-top:10px; min-height:1.2em; text-align:center;"></p>
+            </div>
+        `;
+
+        Swal.fire({
+            html: authModalHTML,
+            showConfirmButton: false, 
+            showCancelButton: true,
+            cancelButtonText: 'Close',
+            width: '90%', 
+            maxWidth: '500px', 
+            didOpen: () => {
+                _attachAuthFormListenersInModal();
+                if (document.body.classList.contains('dark')) {
+                    const swalContainer = Swal.getPopup();
+                    if (swalContainer) {
+                        swalContainer.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--card-bg-dark').trim();
+                        swalContainer.style.color = getComputedStyle(document.documentElement).getPropertyValue('--text-dark').trim();
+                        
+                        swalContainer.querySelectorAll('h2, h3').forEach(el => el.style.color = getComputedStyle(document.documentElement).getPropertyValue('--button-bg-dark').trim());
+                        swalContainer.querySelectorAll('input').forEach(el => {
+                            el.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--input-bg-dark').trim();
+                            el.style.borderColor = getComputedStyle(document.documentElement).getPropertyValue('--input-border-dark').trim();
+                            el.style.color = getComputedStyle(document.documentElement).getPropertyValue('--text-dark').trim();
+                        });
+                        swalContainer.querySelectorAll('.link-button').forEach(el => el.style.color = getComputedStyle(document.documentElement).getPropertyValue('--link-dark').trim() + " !important");
+                        swalContainer.querySelectorAll('.swal2-cancel').forEach(el => {
+                            el.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--button-bg-dark').trim();
+                            el.style.color = getComputedStyle(document.documentElement).getPropertyValue('--button-text-dark').trim();
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+
+    function initAuthUI() {
+      const showAuthModalBtn = document.getElementById('show-auth-modal-btn'); 
+      const userEmailUnderLeaderboard = document.getElementById('user-email-under-leaderboard');
+      const clearLeaderboardBtn = document.getElementById('clear-leaderboard-btn'); 
+      const logoutButtonMenu = document.getElementById('logout-button'); 
+      const editProfileBtnMenu = document.getElementById('edit-profile-btn'); 
+
+      const navAuthBtn = document.getElementById('nav-auth-btn'); 
+      const navLogoutBtn = document.getElementById('nav-logout-btn'); 
+
+
+      if (!firebaseInitialized || !auth) {
+          console.warn("Firebase Auth is not available. Auth UI will be hidden/disabled.");
+          if(showAuthModalBtn) showAuthModalBtn.style.display = 'block'; 
+          const showLeaderboardBtn = document.getElementById('show-leaderboard-main');
+          if(showLeaderboardBtn) showLeaderboardBtn.disabled = true;
+          if(userEmailUnderLeaderboard) userEmailUnderLeaderboard.style.display = 'none';
+          if(clearLeaderboardBtn) clearLeaderboardBtn.style.display = 'none';
+          if(logoutButtonMenu) logoutButtonMenu.style.display = 'none';
+          if(editProfileBtnMenu) editProfileBtnMenu.style.display = 'none';
+          if(navAuthBtn) navAuthBtn.style.display = 'flex'; 
+          if(navLogoutBtn) navLogoutBtn.style.display = 'none';
+          return;
+      }
+
+      auth.onAuthStateChanged(user => {
+        const navAuthBtnIcon = navAuthBtn?.querySelector('i');
+        const navAuthBtnText = navAuthBtn?.querySelector('span'); 
+
+        if (user) {
+          if(showAuthModalBtn) showAuthModalBtn.style.display = 'none'; 
+
+          if (userEmailUnderLeaderboard) {
+            userEmailUnderLeaderboard.textContent = `Logged in: ${user.displayName || user.email}`;
+            userEmailUnderLeaderboard.style.display = 'block';
+          }
+          // Clear leaderboard button is now on the leaderboard page, its visibility is handled there
+          if(logoutButtonMenu) logoutButtonMenu.style.display = 'none'; 
+          if(editProfileBtnMenu) editProfileBtnMenu.style.display = 'none'; 
+          
+          if(navAuthBtn) { 
+              navAuthBtn.style.display = 'flex'; 
+              navAuthBtn.title = "Profile";
+              if(navAuthBtnIcon) navAuthBtnIcon.className = 'fas fa-user-circle';
+              if(navAuthBtnText) navAuthBtnText.textContent = "Profile";
+          }
+          if(navLogoutBtn) navLogoutBtn.style.display = 'flex';
+
+
+        } else {
+          if(showAuthModalBtn) showAuthModalBtn.style.display = 'inline-block';
+          
+          if (userEmailUnderLeaderboard) userEmailUnderLeaderboard.style.display = 'none';
+          if(clearLeaderboardBtn) clearLeaderboardBtn.style.display = 'none'; 
+          if(logoutButtonMenu) logoutButtonMenu.style.display = 'none';
+          if(editProfileBtnMenu) editProfileBtnMenu.style.display = 'none';
+           if(navAuthBtn) { 
+              navAuthBtn.style.display = 'flex';
+              navAuthBtn.title = "Login";
+              if(navAuthBtnIcon) navAuthBtnIcon.className = 'fas fa-sign-in-alt';
+              if(navAuthBtnText) navAuthBtnText.textContent = "Login";
+          }
+          if(navLogoutBtn) navLogoutBtn.style.display = 'none';
+        }
+      });
+
+      navLogoutBtn?.addEventListener('click', () => { 
+        auth.signOut().catch(error => {
+          console.error("Logout Error:", error);
+          Swal.fire('Logout Error', error.message, 'error');
+        });
+      });
+
+      document.getElementById('update-profile-display-name-btn')?.addEventListener('click', async () => {
+        const user = auth.currentUser;
+        if (!user) {
+            Swal.fire('Error', 'You must be logged in to update your profile.', 'error');
+            return;
+        }
+        const newNameInput = document.getElementById('profile-display-name-input');
+        if (!newNameInput) return;
+        const newName = newNameInput.value.trim();
+
+        if (!newName) {
+            Swal.fire('Oops!', 'Display name cannot be empty.', 'warning');
+            return;
+        }
+        try {
+            await user.updateProfile({ displayName: newName });
+            Swal.fire('Success!', 'Display name updated!', 'success');
+            if (userEmailUnderLeaderboard) { 
+              userEmailUnderLeaderboard.textContent = `Logged in: ${newName}`; 
+            }
+            // Update nav button if it shows name
+            const navAuthBtnText = navAuthBtn?.querySelector('span');
+            if (navAuthBtnText && auth.currentUser) navAuthBtnText.textContent = "Profile"; // Or newName if you want to show it there
+
+        } catch (error) {
+            console.error("Error updating display name:", error);
+            Swal.fire('Error', `Could not update display name: ${error.message}`, 'error');
+        }
+      });
+    }
+    
+    function loadProfileData() {
+        const user = auth.currentUser;
+        const profileEmailDisplay = document.getElementById('profile-email-display');
+        const profileDisplayNameInput = document.getElementById('profile-display-name-input');
+
+        if (user && profileEmailDisplay && profileDisplayNameInput) {
+            profileEmailDisplay.textContent = user.email || "N/A";
+            profileDisplayNameInput.value = user.displayName || "";
+        }
+    }
+
+
+    async function clearGlobalLeaderboard() {
+        if (!firebaseInitialized || !db || !auth || !auth.currentUser) {
+            Swal.fire('Error', 'You must be logged in and connected to Firebase to clear the leaderboard.', 'error');
+            return;
+        }
+
+        const result = await Swal.fire({
+            title: 'Are you absolutely sure?',
+            html: "This will permanently delete <strong>ALL</strong> scores from the global leaderboard!<br>This action cannot be undone.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete all scores!',
+            cancelButtonText: 'No, cancel.'
+        });
+
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Deleting Leaderboard...',
+                text: 'Please wait.',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            try {
+                const querySnapshot = await db.collection("leaderboard").get();
+                const batch = db.batch();
+                querySnapshot.forEach(doc => {
+                    batch.delete(doc.ref);
+                });
+                await batch.commit();
+                Swal.fire('Deleted!', 'The global leaderboard has been cleared.', 'success');
+                if (document.getElementById('leaderboard').style.display === 'block') {
+                    displayLeaderboard(); 
+                }
+            } catch (error) {
+                console.error("Error clearing leaderboard:", error);
+                Swal.fire('Error Clearing Leaderboard', `Could not clear the leaderboard: ${error.message}`, 'error');
+            }
+        }
+    }
+
+
+    async function saveScoreToFirestore(playerNameInput, timeInSeconds, movesCount, hints, finalScore, difficultyName) {
+      console.log("Attempting to save score to Firestore:", {playerNameInput, timeInSeconds, movesCount, hints, finalScore, difficultyName });
+      if (!firebaseInitialized || !db || !auth) {
+          console.warn("Firebase not available. Score not saved online.");
+          Swal.fire('Offline Mode', 'Online leaderboard service is unavailable. Your score will not be saved online.', 'warning');
+          resetGameAndShowMenu(); 
+          return;
+      }
+
+      const user = auth.currentUser;
+      if (!user) {
+        Swal.fire('Not Logged In', 'You must be logged in to save your score!', 'info');
+        resetGameAndShowMenu(); 
+        return;
+      }
+      const playerNameForLeaderboard = playerNameInput.trim() || user.displayName || user.email;
+
+      try {
+        await db.collection("leaderboard").add({
+          userId: user.uid,
+          playerName: playerNameForLeaderboard,
+          compositeScore: finalScore, 
+          timeTaken: timeInSeconds,
+          moves: movesCount,
+          hintsUsed: hints,
+          difficulty: difficultyName, 
+          date: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        // No alert here, handleEndGame will show the main success alert.
+        console.log("Score saved successfully.");
+      } catch (error) {
+        console.error("Error saving score to Firebase:", error);
+        Swal.fire('Save Error', `Could not save score online: ${error.message}`, 'error');
+      }
+      console.log("Calling resetGameAndShowMenu from saveScoreToFirestore after attempt.");
+      resetGameAndShowMenu(); 
+    }
+
+    async function displayLeaderboard(difficultyFilterKey = "all") { 
+      const leaderboardList = document.getElementById("leaderboard-list");
+      const clearButton = document.getElementById('clear-leaderboard-btn'); 
+      
+      const difficultyObj = difficultySettings[difficultyFilterKey];
+      const difficultyNameToFilter = difficultyObj ? difficultyObj.name : null;
+
+
+      if (!firebaseInitialized || !db) {
+          console.warn("Firebase not available. Cannot display online leaderboard.");
+          if (leaderboardList) leaderboardList.innerHTML = "<li>Online leaderboard service is currently unavailable.</li>";
+          if (clearButton) clearButton.style.display = 'none'; 
+          showView('leaderboard'); 
+          return;
+      }
+      
+      // showView('leaderboard'); // Already called by the nav button
+      if (leaderboardList) leaderboardList.innerHTML = "<li>Loading scores...</li>";
+      if (auth.currentUser && clearButton) { 
+          clearButton.style.display = 'inline-block';
+      } else if (clearButton) {
+          clearButton.style.display = 'none';
+      }
+
+
+      try {
+        let query = db.collection("leaderboard");
+        if (difficultyNameToFilter && difficultyFilterKey !== "all") {
+            query = query.where("difficulty", "==", difficultyNameToFilter);
+        }
+        const querySnapshot = await query.orderBy("compositeScore", "desc") 
+          .limit(10)
+          .get();
+
+        if (!leaderboardList) return;
+        if (querySnapshot.empty) {
+          leaderboardList.innerHTML = `<li>No scores yet for ${difficultyFilterKey === "all" ? "any difficulty" : difficultyNameToFilter}. Be the first!</li>`;
+          return;
+        }
+        leaderboardList.innerHTML = "";
+        let rank = 1;
+        querySnapshot.forEach((doc) => {
+          const scoreData = doc.data();
+          const listItem = document.createElement("li");
+          const minutes = Math.floor(scoreData.timeTaken / 60);
+          const seconds = scoreData.timeTaken % 60;
+          const timeFormatted = `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+          const dateFormatted = scoreData.date ? new Date(scoreData.date.seconds * 1000).toLocaleDateString() : 'N/A';
+          
+          listItem.innerHTML = `${rank}. ${scoreData.playerName} - <strong>Score: ${scoreData.compositeScore}</strong>
+                                <span class="score-breakdown">(Diff: ${scoreData.difficulty || 'N/A'}, T: ${timeFormatted}, M: ${scoreData.moves}, H: ${scoreData.hintsUsed || 0}) - ${dateFormatted}</span>`;
+          leaderboardList.appendChild(listItem);
+          rank++;
+        });
+      } catch (error) {
+        console.error("Error loading leaderboard from Firebase:", error);
+        if (leaderboardList) leaderboardList.innerHTML = "<li>Could not load leaderboard. Please try again later.</li>";
+         if (error.code === "failed-precondition") {
+            leaderboardList.innerHTML += "<li style='color:red;'>Error: Missing Firestore index. Check console for a link to create it. This usually means you need to go to your Firebase console -> Firestore Database -> Indexes, and create an index on 'leaderboard' collection for fields 'difficulty' (Ascending) and 'compositeScore' (Descending or Ascending, matching your chosen sort).</li>";
+        }
+      }
+    }
+
+    function hideLeaderboardDisplay() { 
+        showView('menu');
+    }
+
+    function handleEndGame() {
+      console.log("handleEndGame called");
+      endTime = Date.now();
+      if (!startTime) {
+          console.error("Error: startTime is not set at endGame.");
+          Swal.fire('Timer Error', "An error occurred with the timer. Cannot calculate score.", 'error');
+          resetGameAndShowMenu();
+          return;
+      }
+      const timeTakenSeconds = Math.floor((endTime - startTime) / 1000);
+      const finalMoveCount = moveCount;
+      const finalHintsUsed = hintsUsedThisGame;
+      const difficulty = getCurrentDifficulty();
+
+      const rawScore = timeTakenSeconds + (finalMoveCount * MOVE_SCORE_VALUE) + (finalHintsUsed * HINT_SCORE_VALUE);
+      const finalScore = Math.round(rawScore / difficulty.scoreDivisor);
+      
+      const gameOverMessage = `Game Over!\nTime: ${Math.floor(timeTakenSeconds / 60)}:${(timeTakenSeconds % 60).toString().padStart(2, "0")}\nMoves: ${finalMoveCount}\nHints: ${finalHintsUsed}\nFinal Score: ${finalScore}`;
+
+      if (!firebaseInitialized || !auth) {
+         Swal.fire('Game Over', `${gameOverMessage}\n\nOnline leaderboard service is unavailable to save score.`, 'info');
+         console.log("Calling resetGameAndShowMenu from handleEndGame (Firebase not init)");
+         resetGameAndShowMenu();
+         return;
+      }
+      const user = auth.currentUser;
+
+      if (!user) {
+        Swal.fire('Game Over', `${gameOverMessage}\n\nPlease log in to save your score online.`, 'info');
+        console.log("Calling resetGameAndShowMenu from handleEndGame (user not logged in)");
+        resetGameAndShowMenu(); 
+        return;
+      }
+
+      const timeFormatted = `${Math.floor(timeTakenSeconds / 60)}:${(timeTakenSeconds % 60).toString().padStart(2, "0")}`;
+      const congratulationsMsg = `Congratulations ${user.displayName || user.email}!\nDifficulty: ${difficulty.name}\nTime: ${timeFormatted}\nMoves: ${finalMoveCount}\nHints: ${finalHintsUsed}\nFinal Score: ${finalScore}`;
+      
+      // Auto-save, no prompt for name here
+      console.log("Auto-saving score...");
+      saveScoreToFirestore(user.displayName || user.email, timeTakenSeconds, finalMoveCount, finalHintsUsed, finalScore, difficulty.name);
+      Swal.fire('Puzzle Solved!', congratulationsMsg.replace(/\n/g, '<br>'), 'success');
+      // resetGameAndShowMenu will be called by saveScoreToFirestore
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log("DOM fully loaded and parsed.");
+
+      if (firebaseFailedToInit) { 
+          Swal.fire({
+              title: 'Connection Warning',
+              text: "Firebase connection failed or is not configured. Online features (leaderboard, authentication) will be unavailable. Check the browser console for details.",
+              icon: 'warning'
+          });
+          const menuDiv = document.querySelector('.menu');
+          if (menuDiv) {
+              const errorMsgP = document.createElement('p');
+              errorMsgP.textContent = "WARNING: Firebase unavailable. Online features disabled.";
+              errorMsgP.style.color = 'orange';
+              errorMsgP.style.fontWeight = 'bold';
+              errorMsgP.style.textAlign = 'center';
+              menuDiv.prepend(errorMsgP); 
+          }
+          const showAuthModalBtn = document.getElementById('show-auth-modal-btn');
+          if(showAuthModalBtn) showAuthModalBtn.style.display = 'none';
+
+          const showLeaderboardBtn = document.getElementById('show-leaderboard-main');
+          if(showLeaderboardBtn) {
+            showLeaderboardBtn.title = "Online leaderboard unavailable"; 
+            showLeaderboardBtn.disabled = true; 
+          }
+          const clearLeaderboardBtn = document.getElementById('clear-leaderboard-btn');
+          if(clearLeaderboardBtn) clearLeaderboardBtn.style.display = 'none';
+          const editProfileBtn = document.getElementById('edit-profile-btn');
+          if(editProfileBtn) editProfileBtn.style.display = 'none';
+      }
+
+      try {
+        initAuthUI(); 
+      } catch (e) {
+        console.error("Failed to initialize Auth UI on DOMContentLoaded:", e);
+      }
+      
+      document.getElementById('show-auth-modal-btn')?.addEventListener('click', showAuthModal);
+      // document.getElementById('start-game-btn-main')?.addEventListener('click', startGame); // Now handled by bottom nav
+      // document.getElementById('toggle-theme-main')?.addEventListener('click', toggleTheme); // Now handled by bottom nav
+      // document.getElementById('show-leaderboard-main')?.addEventListener('click', () => displayLeaderboard("all")); // Now handled by bottom nav
+      
+      document.getElementById('hide-leaderboard-btn')?.addEventListener('click', hideLeaderboardDisplay);
+      document.getElementById('hint-btn')?.addEventListener('click', showHint);
+      document.getElementById('delete-btn')?.addEventListener('click', handleDeleteClick);
+      document.getElementById('undo')?.addEventListener('click', undoLastMove);
+      document.getElementById('redo-btn')?.addEventListener('click', redoLastMove); 
+      document.getElementById('highlight-errors-btn')?.addEventListener('click', () => handleHighlightClick(true)); 
+      document.getElementById('check-btn')?.addEventListener('click', handleCheckClick);
+      document.getElementById('clear-leaderboard-btn')?.addEventListener('click', clearGlobalLeaderboard);
+      document.getElementById('update-profile-display-name-btn')?.addEventListener('click', async () => {
+        const user = auth.currentUser;
+        if (!user) {
+            Swal.fire('Error', 'You must be logged in to update your profile.', 'error');
+            return;
+        }
+        const newNameInput = document.getElementById('profile-display-name-input');
+        if (!newNameInput) return;
+        const newName = newNameInput.value.trim();
+
+        if (!newName) {
+            Swal.fire('Oops!', 'Display name cannot be empty.', 'warning');
+            return;
+        }
+        try {
+            await user.updateProfile({ displayName: newName });
+            Swal.fire('Success!', 'Display name updated!', 'success');
+            const userEmailUnderLeaderboard = document.getElementById('user-email-under-leaderboard');
+            if(userEmailUnderLeaderboard) userEmailUnderLeaderboard.textContent = `Logged in: ${newName}`;
+            const navAuthBtn = document.getElementById('nav-auth-btn');
+            if(navAuthBtn) navAuthBtn.querySelector('span').textContent = "Profile"; // Update bottom nav text if needed
+        } catch (error) {
+            console.error("Error updating display name:", error);
+            Swal.fire('Error', `Could not update display name: ${error.message}`, 'error');
+        }
+      });
+
+
+      const endGameButton = document.getElementById("end-game");
+      endGameButton?.addEventListener('click', () => { 
+        if (endGameButton && !endGameButton.disabled) handleEndGame();
+      });
+      
+      const difficultySelector = document.getElementById('difficulty-level');
+      const difficultyDisplayEl = document.getElementById("difficulty-display");
+      if (difficultySelector && difficultyDisplayEl) {
+          const selectedOptionText = difficultySelector.options[difficultySelector.selectedIndex].text;
+          difficultyDisplayEl.textContent = `Difficulty: ${selectedOptionText}`;
+          difficultySelector.addEventListener('change', (event) => {
+             const newSelectedOptionText = event.target.options[event.target.selectedIndex].text;
+             difficultyDisplayEl.textContent = `Difficulty: ${newSelectedOptionText}`;
+          });
+      }
+      
+      const leaderboardDifficultyFilter = document.getElementById('leaderboard-difficulty-filter');
+      if (leaderboardDifficultyFilter) {
+        leaderboardDifficultyFilter.addEventListener('change', (event) => {
+            displayLeaderboard(event.target.value); 
+        });
+      }
+
+      // Bottom Navigation Listeners
+      document.getElementById('nav-menu-btn')?.addEventListener('click', () => showView('menu'));
+      document.getElementById('nav-game-btn')?.addEventListener('click', () => {
+          if(document.getElementById('game').style.display === 'none' && !fullGridSolution) { 
+              startGame();
+          } else {
+            showView('game');
+          }
+      });
+      document.getElementById('nav-leaderboard-btn')?.addEventListener('click', () => showView('leaderboard'));
+      document.getElementById('nav-theme-btn')?.addEventListener('click', toggleTheme); 
+      document.getElementById('nav-auth-btn')?.addEventListener('click', () => {
+          const user = auth.currentUser;
+          if (user) {
+              showView('profile'); 
+          } else {
+              showAuthModal();
+          }
+      });
+      document.getElementById('nav-logout-btn')?.addEventListener('click', () => {
+        auth.signOut().catch(error => {
+          console.error("Logout Error:", error);
+          Swal.fire('Logout Error', error.message, 'error');
+        });
+      });
+      
+      
+      showView('menu'); 
+      const bottomNav = document.getElementById('bottom-nav');
+      if(bottomNav) bottomNav.style.display = 'flex'; 
+
+
+      console.log("All event listeners attached.");
+    });
+    // --- END OF SCRIPT ---
+  </script>
+</body>
+</html>
