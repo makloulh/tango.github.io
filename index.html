@@ -2397,33 +2397,6 @@
       document.getElementById('highlight-errors-btn')?.addEventListener('click', () => handleHighlightClick(true)); 
       document.getElementById('check-btn')?.addEventListener('click', handleCheckClick);
       document.getElementById('clear-leaderboard-btn')?.addEventListener('click', clearGlobalLeaderboard);
-      document.getElementById('update-profile-display-name-btn')?.addEventListener('click', async () => {
-        const user = auth.currentUser;
-        if (!user) {
-            Swal.fire('Error', 'You must be logged in to update your profile.', 'error');
-            return;
-        }
-        const newNameInput = document.getElementById('profile-display-name-input');
-        if (!newNameInput) return;
-        const newName = newNameInput.value.trim();
-
-        if (!newName) {
-            Swal.fire('Oops!', 'Display name cannot be empty.', 'warning');
-            return;
-        }
-        try {
-            await user.updateProfile({ displayName: newName });
-            Swal.fire('Success!', 'Display name updated!', 'success');
-            const userEmailUnderLeaderboard = document.getElementById('user-email-under-leaderboard');
-            if(userEmailUnderLeaderboard) userEmailUnderLeaderboard.textContent = `Logged in: ${newName}`;
-            const navAuthBtn = document.getElementById('nav-auth-btn');
-            if(navAuthBtn) navAuthBtn.querySelector('span').textContent = "Profile"; // Update bottom nav text if needed
-        } catch (error) {
-            console.error("Error updating display name:", error);
-            Swal.fire('Error', `Could not update display name: ${error.message}`, 'error');
-        }
-      });
-
 
       const endGameButton = document.getElementById("end-game");
       endGameButton?.addEventListener('click', () => { 
